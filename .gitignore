@@ -32,3 +32,5 @@ go.work.sum
 .vscode/
 
 TODO.md
+
+.container_volumes/
