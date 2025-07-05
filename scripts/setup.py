@@ -1,5 +1,4 @@
 import os
-import sys
 
 
 def main():
@@ -32,6 +31,7 @@ def main():
                     dst.write(src.read())
         else:
             print(f"Warning: {example_env_file} not found. Skipping .env creation.")
+
 
 if __name__ == "__main__":
     main()

@@ -1,19 +1,18 @@
-FROM golang:1.24.4 AS builder
+FROM alpine:3.22 AS builder
+
+RUN apk add npm go make
 
 WORKDIR /app
 
-COPY cmd /app/cmd
-COPY internal /app/internal
-COPY go.mod /app/go.mod
-COPY go.sum /app/go.sum
+COPY . /app
 
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o gollery ./cmd/gollery/main.go
+RUN CGO_ENABLED=0 GOOS=linux make build
 
 FROM alpine:3.20
 
 WORKDIR /gollery
 
-COPY --from=builder /app/gollery ./gollery
+COPY --from=builder /app/dist/gollery ./gollery
 
 COPY migrations/ /gollery/migrations/
 

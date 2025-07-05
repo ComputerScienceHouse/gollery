@@ -32,5 +32,6 @@ go.work.sum
 .vscode/
 
 TODO.md
-
 .container_volumes/
+server/web/
+dist/
