@@ -7,5 +7,6 @@ build: build-web
 build-web:
 	cd web \
     && rm -rf ../server/web \
+    && npm install \
     && npm run build \
     && mv dist ../server/web \
