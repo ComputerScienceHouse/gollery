@@ -11,7 +11,7 @@ import (
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 
-	"github.com/ComputerScienceHouse/gollery/internal/endpoints/v1"
+	v1 "github.com/ComputerScienceHouse/gollery/internal/endpoints/v1"
 )
 
 const (
@@ -20,7 +20,7 @@ const (
 )
 
 var (
-	//go:embed web
+	// go:embed web
 	webFS embed.FS
 )
 
