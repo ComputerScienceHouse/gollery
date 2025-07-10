@@ -71,7 +71,7 @@ func RegisterDirectoryRoutes(router *mux.Router) {
 		vars := mux.Vars(r)
 		did := vars["did"]
 		log.Printf("vars: %v\n", vars)
-		dir = selectFromById(did, w)
+		dir = selectDirectoryById(did, w)
 		marshalIntoMaskedDirectory(dir, w)
 
 	}).Methods("GET")
@@ -132,7 +132,7 @@ WHERE b.did IS NULL;`).Scan(&dir.Name, &dir.Creator, &dir.CreateDate); err != ni
 		}
 
 		//returning the updated value below
-		dir = selectFromById(did, w)
+		dir = selectDirectoryById(did, w)
 		marshalIntoMaskedDirectory(dir, w)
 
 	}).Methods("PUT")
@@ -165,8 +165,8 @@ WHERE b.did IS NULL;`).Scan(&dir.Name, &dir.Creator, &dir.CreateDate); err != ni
 
 }
 
-// selectFromById selects a maskedDirectory from a did, will likely be modularized later on once I understand go interfaces
-func selectFromById(id string, w http.ResponseWriter) maskedDirectory {
+// selectDirectoryById selects a maskedDirectory from a did, will likely be modularized later on once I understand go interfaces
+func selectDirectoryById(id string, w http.ResponseWriter) maskedDirectory {
 	var dir maskedDirectory
 	if err := srv.DB.QueryRow("SELECT name, creator, create_date FROM directory WHERE did = $1;", id).Scan(&dir.Name, &dir.Creator, &dir.CreateDate); err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
