@@ -21,6 +21,7 @@ CREATE TABLE groups (
 
 CREATE TABLE file (
     fid                 serial,
+    name                varchar(128),
     creator             char(32),
     upload_time         date,
     s3_key              varchar(100),
